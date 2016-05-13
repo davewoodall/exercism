@@ -1,0 +1,2 @@
+class Hamming
+end
