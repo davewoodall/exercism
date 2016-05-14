@@ -1,22 +1,24 @@
-class Gigasecond
+module Gigasecond
   VERSION = 1
-  class << self
-    def from(time, birthday=AGE::Birth)
-      seconds = birthday.new(time).in_seconds
-    end
+
+  def self.from(utc_date, date_picker=AGE::Birth)
+    date_picker.new(utc_date).gigasecond_date
   end
 end
 
 module AGE
   class Birth
-    attr_reader :time
+    attr_reader :utc_date, :time
 
-    def initialize(time)
+    GIGASECOND = 10**9
+
+    def initialize(utc_date, time=Time)
       @time = time
+      @utc_date = utc_date
     end
 
-    def in_seconds
-      time.to_i
+    def gigasecond_date
+      time.at(utc_date + GIGASECOND)
     end
   end
 end
