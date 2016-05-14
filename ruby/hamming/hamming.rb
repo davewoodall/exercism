@@ -1,6 +1,4 @@
-require 'pry'
-
-class Hamming
+module Hamming
   VERSION = 2
 
   def self.compute(alpha, beta, strand=DNA::Strand, machine=DNA::Machine)
