@@ -2,7 +2,13 @@
 # Ruby is an object oriented language.
 # So I'm trying to practice working with objects.
 # I'm also practicing Dependency Injection per Sandy Metz.
-# Because Raindrops might change the criterial for a song (ex. even numbers). It could also change the type of song (ex. Fizz Buzz). The numbers to create the criteria for notes is different than the notes themselves. I wanted to manage them as separate objects and Inject them into the method without hard coding them into the Raindrops module.
+# Because Raindrops might change the criterial
+# for a song (ex. even numbers). 
+# It could also change the type of song (ex. Fizz Buzz).
+# The numbers to create the criteria for notes is different
+# than the notes themselves. I wanted to manage them as
+# separate objects and Inject them into the method without
+# hard coding them into the Raindrops module.
 
 
 module Raindrops
@@ -59,8 +65,8 @@ module Rain
 
     def transform
       go_fish
-      catch_and_release
-      filet_fish
+      catch_and_release! # add bang to show it mutates object
+      filet_fish! # add bang to show it mutates object
     end
 
     def go_fish
@@ -75,11 +81,11 @@ module Rain
       number % n == 0
     end
 
-    def catch_and_release
+    def catch_and_release!
       tally.select! { |k,v| v == true || k == :input }
     end
 
-    def filet_fish
+    def filet_fish!
       tally.map { |k,v| k == :input ? v : k }.uniq
     end
   end
