@@ -16,11 +16,11 @@ class Squares
   end
 
   def square_of_sum
-    (1..number).to_a.inject(:+) ** 2
+    (1..number).inject(:+) ** 2
   end
 
   def sum_of_squares
-    (1..number).to_a.map { |n| n ** 2 }.inject(:+)
+    (1..number).map { |n| n ** 2 }.inject(:+)
   end
 
   def difference
