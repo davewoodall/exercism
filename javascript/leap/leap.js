@@ -4,12 +4,23 @@ var Year = function (year) {
 
 Year.prototype = {
   isLeap: function() {
-    var year = this.input;
-    if (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0 ) {
-      return true
-    } else if (year % 100 === 0 || year % 4 !== 0 ) {
+    if (this.leapYears()) {
+      return true;
+    } else if (!this.notLeapYears()){
       return false;
     }
+  },
+  leapYears: function() {
+    var year = this.input;
+    if (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0 ) {
+      return true;
+    }
+  },
+  notLeapYears: function() {
+    var year = this.input;
+    if (year % 100 === 0 || year % 4 !== 0 ) {
+     return false;
+   }
   }
 }
 
