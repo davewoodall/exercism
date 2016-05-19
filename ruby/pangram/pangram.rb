@@ -1,11 +1,11 @@
 module Pangram
   VERSION = 1
-  def self.is_pangram?(string, engine=StringAnalyzer)
+  def self.is_pangram?(string, engine=Engine::StringAnalyzer)
     engine.new(string, analyze: 'pangram').run
   end
 end
 
-module Pangram
+module Engine
   class StringAnalyzer
 
     attr_reader :string, :action
@@ -20,11 +20,27 @@ module Pangram
     end
 
     def pangram
-      alphabetize_string!
+      judge alphabetize_string!
     end
 
+  private
+
     def alphabetize_string!
-      string.split('').sort.uniq.join('').strip
+      string.split('').sort.uniq.join('')
+    end
+
+    def judge(string)
+      alf = ('a'..'z').to_a
+
+      string.split('').each do |letter|
+        alf.delete(letter.downcase)
+      end
+
+      if alf.length == 0
+        true
+      else
+        false
+      end
     end
   end
 end
