@@ -26,7 +26,7 @@ module Engine
   private
 
     def alphabetize_string!
-      string.split('').sort.uniq.join('')
+      string.chars.sort.uniq.join
     end
 
     def judge(string)
@@ -36,11 +36,7 @@ module Engine
         alf.delete(letter.downcase)
       end
 
-      if alf.length == 0
-        true
-      else
-        false
-      end
+      alf.length == 0 # nice! Thanks, @rbndickson
     end
   end
 end
