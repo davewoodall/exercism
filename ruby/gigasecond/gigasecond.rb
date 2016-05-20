@@ -1,8 +1,8 @@
 module Gigasecond
   VERSION = 1
 
-  def self.from(utc_date, date_picker=AGE::Birth)
-    date_picker.new(utc_date).gigasecond_date
+  def self.from(utc_date, start_date=AGE::Birth)
+    start_date.new(utc_date).gigasecond_date
   end
 end
 
