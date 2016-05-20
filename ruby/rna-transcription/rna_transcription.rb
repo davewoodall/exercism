@@ -1,7 +1,7 @@
 module Complement
   VERSION = 3
   def self.of_dna(fixture, complementer=Tool::Complementer)
-    complementer.new(fixture).compare
+    complementer.new(fixture).complement
   end
 end
 
@@ -22,20 +22,18 @@ module Tool
       check_for_typos
     end
 
-    def splice
-      @splice = nuc.split('')
+    def split
+      split ||= nuc.split('') # good call on ||= 
     end
 
-    def compare
-      splice.map do |compare|
-        COMPLEMENT[compare].to_s
-      end.join('')
+    def complement
+      nuc.gsub(/./,COMPLEMENT) # sweet! Thanks, @tnordloh!
     end
 
   private
 
     def check_for_typos
-      splice.each do |prospect|
+      split.each do |prospect|
         raise ArgumentError if COMPLEMENT[prospect] == nil
       end
     end
