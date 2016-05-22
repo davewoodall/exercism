@@ -8,33 +8,33 @@ end
 module Tool
   class Complementer
 
-    COMPLEMENT = {
+    DNA_COMPLEMENTS = {
       'G' => 'C',
       'C' => 'G',
       'T' => 'A',
       'A' => 'U'
     }
 
-    attr_reader :nuc, :splice
+    attr_reader :nuc, :result
 
-    def initialize(nucleotide)
-      @nuc = nucleotide
+    def initialize(nucleotides)
+      @nuc = nucleotides
       check_for_typos
     end
 
-    def split
-      split ||= nuc.split('') # good call on ||= 
-    end
-
     def complement
-      nuc.gsub(/./,COMPLEMENT) # sweet! Thanks, @tnordloh!
+      @result ||= nuc.gsub(/./,DNA_COMPLEMENTS) # sweet! Thanks, @tnordloh!
     end
 
   private
 
+    def nucleotides
+      @nucleotides ||= nuc.chars # thanks, @bcc32 for memoize catch!
+    end
+
     def check_for_typos
-      split.each do |prospect|
-        raise ArgumentError if COMPLEMENT[prospect] == nil
+      nucleotides.each do |prospect|
+        raise ArgumentError if DNA_COMPLEMENTS[prospect] == nil
       end
     end
   end
