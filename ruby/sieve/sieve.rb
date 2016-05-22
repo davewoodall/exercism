@@ -11,7 +11,7 @@ class Sieve
 
   def primes
     return [] if ceiling < FIRST_PRIME
-    algorithm.new(ceiling, iterator).get_primes
+    algorithm.new(ceiling, iterator).primes
   end
 end
 
@@ -26,7 +26,7 @@ class SieveAlgorithm
     fill_baskets
   end
 
-  def get_primes
+  def primes
     baskets.map do |group|
       group.prime
     end
