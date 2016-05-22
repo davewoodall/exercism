@@ -1,19 +1,35 @@
 class Sieve
-  attr_reader :iterator, :ceiling, :group, :basket, :baskets
+  attr_reader :iterator, :ceiling, :algorithm
 
   FIRST_PRIME = 2
 
-  def initialize(ceiling, basket=NumberBasket)
-    @iterator = FIRST_PRIME
-    @ceiling  = ceiling
-    @basket   = basket
-    @baskets  = []
-    return [] if ceiling < FIRST_PRIME
-    fill_baskets
+  def initialize(ceiling, algorithm=SieveAlgorithm)
+    @iterator  = FIRST_PRIME
+    @ceiling   = ceiling
+    @algorithm = algorithm
   end
 
   def primes
-    get_primes
+    return [] if ceiling < FIRST_PRIME
+    algorithm.new(ceiling, iterator).get_primes
+  end
+end
+
+class SieveAlgorithm
+  attr_reader :iterator, :ceiling, :group, :basket, :baskets
+
+  def initialize(ceiling, iterator, basket=NumberBasket)
+    @iterator = iterator
+    @ceiling  = ceiling
+    @basket   = basket
+    @baskets  = []
+    fill_baskets
+  end
+
+  def get_primes
+    baskets.map do |group|
+      group.prime
+    end
   end
 
 private
@@ -35,12 +51,6 @@ private
 
     unless check.include?(true)
       baskets << basket.new(iterator, ceiling)
-    end
-  end
-
-  def get_primes
-    baskets.map do |group|
-      group.prime
     end
   end
 end
