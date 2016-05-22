@@ -8,7 +8,7 @@ module Gigasecond
   end
 end
 
-module AGE
+module Age # Thanks, @devonestes for the suggestions
   class Birth
     attr_reader :utc_date
 
@@ -24,8 +24,8 @@ module CountBy
     attr_reader :time, :start_time
 
     def initialize(start_time, time=Time )
-      start_time = start_time
-      time = time
+      @start_time = start_time
+      @time = time
     end
 
     GIGASECOND = 10**9
